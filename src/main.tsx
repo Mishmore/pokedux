@@ -11,10 +11,7 @@ import { ChakraProvider } from "@chakra-ui/react";
 
 const store = legacy_createStore(
   pokemonsReducer,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  (window as any).__REDUX_DEVTOOLS_EXTENSION__ &&
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (window as any).__REDUX_DEVTOOLS_EXTENSION__()
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
 ReactDOM.createRoot(document.getElementById("root")!).render(

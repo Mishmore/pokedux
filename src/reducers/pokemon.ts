@@ -1,3 +1,4 @@
+import { Reducer } from "redux";
 import { ActionType } from "../actions/types";
 
 export interface Pokemon {

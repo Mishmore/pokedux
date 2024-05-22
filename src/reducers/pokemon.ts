@@ -3,7 +3,7 @@ import { ActionType } from "../actions/types";
 export interface Pokemon {
   name: string;
   url: string;
-  abilitiesList: Array<string>;
+  abilitiesList?: Array<string>;
   sprites: {
     front_default: string;
   };

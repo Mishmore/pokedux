@@ -13,6 +13,8 @@ interface PokemonListResponse {
   results: Array<{ name: string; url: string }>;
 }
 interface PokemonDetailsResponse {
+  name: string;
+  url: string;
   abilities: Array<{
     ability: { name: string; url: string; is_hidden: boolean };
   }>;

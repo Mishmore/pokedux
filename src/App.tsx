@@ -9,10 +9,11 @@ import { getPokemonList } from "./api";
 import { PokemonState } from "./reducers/pokemon";
 import { getPokemonWithDetails } from "./actions";
 import { useDispatch, useSelector } from "react-redux";
+import { AppThunkDispatch } from "./main";
 
 function App() {
   const pokemons = useSelector((state: PokemonState) => state.pokemons);
-  const dispatch = useDispatch();
+  const dispatch: AppThunkDispatch = useDispatch<AppThunkDispatch>();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -40,9 +41,10 @@ function App() {
                 image={elm.sprites.front_default}
               >
                 <Flex gap={4}>
-                  {elm.abilitiesList.map((elm, i) => (
-                    <Tag key={elm + i}>{elm}</Tag>
-                  ))}
+                  {elm.abilitiesList &&
+                    elm.abilitiesList.map((elm, i) => (
+                      <Tag key={elm + i}>{elm}</Tag>
+                    ))}
                 </Flex>
               </PokemonCard>
             ))}

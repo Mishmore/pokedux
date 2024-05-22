@@ -1,13 +1,13 @@
 import { useEffect } from "react";
 
-import { Center, Container, Flex, Image } from "@chakra-ui/react";
+import { Center, Container, Flex, Image, Tag } from "@chakra-ui/react";
 import { Searchbar } from "./components/Searchbar";
 import { PokemonCard } from "./components/PokemonCard";
 import { PokemonList } from "./components/PokemonList";
 import logo from "./assets/logo.svg";
 import { getPokemonList } from "./api";
 import { PokemonState } from "./reducers/pokemon";
-import { setPokemons } from "./actions";
+import { getPokemonWithDetails } from "./actions";
 import { useDispatch, useSelector } from "react-redux";
 
 function App() {
@@ -17,7 +17,7 @@ function App() {
   useEffect(() => {
     const fetchData = async () => {
       const data = await getPokemonList();
-      dispatch(setPokemons(data.results));
+      dispatch(getPokemonWithDetails(data.results.map((elm) => elm.url)));
     };
 
     fetchData();
@@ -34,7 +34,17 @@ function App() {
         <PokemonList>
           <>
             {pokemons.map((elm) => (
-              <PokemonCard key={elm.name} name={elm.name} url={elm.url} />
+              <PokemonCard
+                key={elm.name}
+                name={elm.name}
+                image={elm.sprites.front_default}
+              >
+                <Flex gap={4}>
+                  {elm.abilitiesList.map((elm, i) => (
+                    <Tag key={elm + i}>{elm}</Tag>
+                  ))}
+                </Flex>
+              </PokemonCard>
             ))}
           </>
         </PokemonList>

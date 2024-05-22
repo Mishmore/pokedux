@@ -9,17 +9,20 @@ import {
 
 interface IPokemonCard {
   name: string;
-  url: string;
+  image: string;
+  children: JSX.Element;
 }
 
-export const PokemonCard = ({ name, url }: IPokemonCard) => {
+export const PokemonCard = ({ name, image, children }: IPokemonCard) => {
   return (
     <Card>
-      <CardHeader>{name}</CardHeader>
+      <CardHeader>
+        <Text>{name}</Text>
+      </CardHeader>
       <CardBody>
-        <Image src="" />
-        <Text>description</Text>
+        <Image src={image} alt={name} />
       </CardBody>
+      <CardFooter>{children}</CardFooter>
     </Card>
   );
 };

@@ -10,18 +10,18 @@ import {
   applyMiddleware,
   legacy_createStore,
 } from "redux";
-import { pokemonsReducer } from "./reducers/pokemon.ts";
 
 import { ChakraProvider } from "@chakra-ui/react";
 import { logger, capitalizer } from "./middlewares";
 import { ThunkAction, ThunkDispatch, thunk } from "redux-thunk";
 import { composeWithDevTools } from "@redux-devtools/extension";
+import rootReducer from "./reducers/rootReducers.ts";
 
 const composedEnhancers: StoreEnhancer = composeWithDevTools(
   applyMiddleware(thunk, capitalizer, logger)
 );
 
-const store = legacy_createStore(pokemonsReducer, composedEnhancers);
+const store = legacy_createStore(rootReducer, composedEnhancers);
 export type AppStore = typeof store;
 export type RootState = ReturnType<AppStore["getState"]>;
 export type AppDispatch = AppStore["dispatch"];

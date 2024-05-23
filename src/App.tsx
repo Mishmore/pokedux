@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-import { Center, Container, Flex, Image, Tag } from "@chakra-ui/react";
+import { Center, Container, Flex, Image, Spinner, Tag } from "@chakra-ui/react";
 import { Searchbar } from "./components/Searchbar";
 import { PokemonCard } from "./components/PokemonCard";
 import { PokemonList } from "./components/PokemonList";
@@ -9,11 +9,13 @@ import { getPokemonList } from "./api";
 import { PokemonState } from "./reducers/pokemon";
 import { getPokemonWithDetails } from "./actions";
 import { useDispatch, useSelector } from "react-redux";
-import { AppThunkDispatch } from "./main";
+import { AppThunkDispatch, RootState } from "./main";
 
 function App() {
-  const pokemons = useSelector((state: PokemonState) => state.pokemons);
+  const pokemons = useSelector((state: RootState) => state.pokemons.pokemons);
   const dispatch: AppThunkDispatch = useDispatch<AppThunkDispatch>();
+
+  console.log("pokemons", pokemons);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -26,6 +28,8 @@ function App() {
 
   return (
     <Container maxW="1024px" p={6}>
+      <Spinner size="xl" />
+
       <Flex direction="column" gap={6}>
         <Center>
           <Image src={logo} w={60} />

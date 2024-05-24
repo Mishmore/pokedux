@@ -5,25 +5,17 @@ import { Searchbar } from "./components/Searchbar";
 import { PokemonCard } from "./components/PokemonCard";
 import { PokemonList } from "./components/PokemonList";
 import logo from "./assets/logo.svg";
-import { getPokemonList } from "./api";
-import { PokemonState } from "./reducers/pokemon";
-import { getPokemonWithDetails } from "./actions";
+
 import { useDispatch, useSelector } from "react-redux";
 import { AppThunkDispatch, RootState } from "./main";
+import { fetchPokemonWithDetails } from "./slices/pokemons";
 
 function App() {
   const pokemons = useSelector((state: RootState) => state.pokemons.pokemons);
   const dispatch: AppThunkDispatch = useDispatch<AppThunkDispatch>();
 
-  console.log("pokemons", pokemons);
-
   useEffect(() => {
-    const fetchData = async () => {
-      const data = await getPokemonList();
-      dispatch(getPokemonWithDetails(data.results.map((elm) => elm.url)));
-    };
-
-    fetchData();
+    dispatch(fetchPokemonWithDetails());
   }, [dispatch]);
 
   return (
